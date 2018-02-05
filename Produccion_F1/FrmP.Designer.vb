@@ -28,13 +28,25 @@ Partial Class FrmP
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DGV2 = New System.Windows.Forms.DataGridView()
+        Me.CHK = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.DGV = New System.Windows.Forms.DataGridView()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.CHK = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtOrder = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DGV2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -85,10 +97,16 @@ Partial Class FrmP
         Me.DGV2.AllowUserToDeleteRows = False
         Me.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CHK})
-        Me.DGV2.Location = New System.Drawing.Point(136, 47)
+        Me.DGV2.Location = New System.Drawing.Point(136, 135)
         Me.DGV2.Name = "DGV2"
-        Me.DGV2.Size = New System.Drawing.Size(387, 196)
+        Me.DGV2.Size = New System.Drawing.Size(387, 108)
         Me.DGV2.TabIndex = 59
+        '
+        'CHK
+        '
+        Me.CHK.HeaderText = "CHK"
+        Me.CHK.Name = "CHK"
+        Me.CHK.Width = 50
         '
         'Label13
         '
@@ -119,17 +137,121 @@ Partial Class FrmP
         Me.DateTimePicker1.Size = New System.Drawing.Size(117, 20)
         Me.DateTimePicker1.TabIndex = 64
         '
-        'CHK
+        'Panel1
         '
-        Me.CHK.HeaderText = "CHK"
-        Me.CHK.Name = "CHK"
-        Me.CHK.Width = 50
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.txtOrder)
+        Me.Panel1.Location = New System.Drawing.Point(136, 21)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(387, 108)
+        Me.Panel1.TabIndex = 85
+        Me.Panel1.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(3, 65)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(46, 13)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "Factura:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(122, 65)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(39, 13)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Label7"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(3, 43)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(59, 13)
+        Me.Label4.TabIndex = 5
+        Me.Label4.Text = "Proveedor:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(122, 43)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Label5"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(3, 24)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(81, 13)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Cod Proveedor:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(122, 24)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(39, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Label3"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(3, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(117, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "N. Entrada Mercaderia:"
+        '
+        'txtOrder
+        '
+        Me.txtOrder.AutoSize = True
+        Me.txtOrder.Location = New System.Drawing.Point(122, 5)
+        Me.txtOrder.Name = "txtOrder"
+        Me.txtOrder.Size = New System.Drawing.Size(39, 13)
+        Me.txtOrder.TabIndex = 0
+        Me.txtOrder.Text = "Label1"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 84)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(98, 13)
+        Me.Label8.TabIndex = 9
+        Me.Label8.Text = "Fecha Documento:"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(122, 84)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(39, 13)
+        Me.Label9.TabIndex = 8
+        Me.Label9.Text = "Label9"
         '
         'FrmP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(537, 310)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -145,6 +267,8 @@ Partial Class FrmP
         Me.StatusStrip1.PerformLayout()
         CType(Me.DGV2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -160,4 +284,15 @@ Partial Class FrmP
     Friend WithEvents DGV As DataGridView
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents CHK As DataGridViewCheckBoxColumn
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtOrder As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
 End Class

@@ -128,18 +128,28 @@ Public Class FrmP
     Private Sub DGV_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellContentClick
         DGV2.Visible = Enabled
         objectCode = DGV(0, DGV.CurrentCell.RowIndex).Value.ToString()
-        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("WITH batchs AS
-        (
-        select T0.ItemCode, t0.itemname,SUM(CASE T0.Direction when 0 then 1 else -1 end * T0.Quantity) as Quantitys, T0.BatchNum , T5.U_Heat,t5.U_Coi,t5.U_Ancho,t5.U_Correlativo 
-        from OIGN t1 
-        inner join IGN1 t2 on t1.docentry = t2.docentry
-        inner join OBTN t5 on t5.itemcode = t2.itemcode
-        inner join IBT1 T0 on T0.BatchNum = T5.DistNumber 
-        where t1.DocEntry = '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' and t5.InDate = t1.DocDate and T0.whsCode = 'PT'
-        GROUP BY t0.ItemCode,t0.itemname,T0.BatchNum , T5.U_Heat,t5.U_Coi,t5.U_Ancho,t5.U_Correlativo
-        )
-        SELECT ItemCode, ItemName, Quantitys, BatchNum, U_Heat, U_Coi,U_Ancho,U_Correlativo from batchs where Quantitys > 0 
-        ", con.ObtenerConexion())
+
+        Dim SQL_da2 As SqlDataAdapter = New SqlDataAdapter("
+        select T1.CardCode,T1.CardName,t1.NumAtCard,T1.DocDate
+        from OPDN T1", con.ObtenerConexion())
+        Dim DT_dat2 As System.Data.DataTable = New System.Data.DataTable()
+        SQL_da2.Fill(DT_dat2)
+        Label3.Text = DT_dat2.Rows(0).Item("CardCode").ToString
+        Label5.Text = DT_dat2.Rows(0).Item("CardName").ToString
+        Label7.Text = DT_dat2.Rows(0).Item("NumAtCard").ToString
+        Label9.Text = DT_dat2.Rows(0).Item("DocDate").ToString
+        con.ObtenerConexion.Close()
+
+        Panel1.Visible = True
+
+        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode,t4.ItemName,SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as Quantitys, T4.BatchNum, T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo
+FROM OITL T0
+INNER JOIN OPDN T2 on t2.DocEntry = t0.DocEntry		
+INNER JOIN ITL1 T1 ON T0.LogEntry = T1.LogEntry
+INNER JOIN OBTN T3 ON T1.MdAbsEntry = T3.AbsEntry
+inner join IBT1 T4 on T4.BatchNum = T3.DistNumber
+WHERE T0.DocEntry =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' AND T0.DocNum =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' and T0.BaseEntry = 0
+GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
         DGV2.DataSource = DT_dat
@@ -210,10 +220,11 @@ Public Class FrmP
     'End Sub
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("select DocNum from oign where CANCELED = 'N' and docdate ='" + DateTimePicker1.Value.ToString("yyyy/MM/dd") + "' ORDER BY DocNum", con.ObtenerConexion())
+        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("select DocNum from opdn where CANCELED = 'N' and docdate ='" + DateTimePicker1.Value.ToString("yyyy/MM/dd") + "' ORDER BY DocNum", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
         DGV.DataSource = DT_dat
+        txtOrder.Text = DT_dat.Rows(0).Item("DocNum").ToString
         con.ObtenerConexion.Close()
     End Sub
 End Class
