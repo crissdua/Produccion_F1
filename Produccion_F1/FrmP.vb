@@ -67,20 +67,28 @@ Public Class FrmP
     End Function
 
 
-    Private Sub imprime(barcode As String, desc As String, anch As String, pes As String, bob As String, het As String, coi As String)
+    Private Sub imprime(barcode As String, desc As String, anch As String, pes As String, itmcod As String, het As String, coi As String, whs As String)
         Dim Report1 As New CrystalDecisions.CrystalReports.Engine.ReportDocument()
         Report1.PrintOptions.PaperOrientation = PaperOrientation.Portrait
         Report1.Load(Application.StartupPath + "\Report\Informe.rpt", CrystalDecisions.Shared.OpenReportMethod.OpenReportByDefault.OpenReportByDefault)
-        Report1.SetParameterValue("CodBatch", barcode)
-        'Report1.SetParameterValue("CodBatch", txtBarcode.Text)
-        Report1.SetParameterValue("descripcion", desc)
-        Report1.SetParameterValue("anchotira", anch)
-        Report1.SetParameterValue("pesoreal", pes)
-        Report1.SetParameterValue("bobina", bob)
+        ''-----------------------------------------ENCABEZADO NO CAMBIA POR IMPRESION------------------------------------------
+        Report1.SetParameterValue("cardcode", Label3.Text)
+        Report1.SetParameterValue("cardname", Label5.Text)
+        Report1.SetParameterValue("docnum", Label1.Text)
+        Report1.SetParameterValue("docdate", Label9.Text)
+        Report1.SetParameterValue("numatcard", Label7.Text)
+        Report1.SetParameterValue("ingresodate", Label11.Text)
+        ''------------------------------------------DETALLE TRAE DATOS POR PARAMETROS------------------------------------------
+        Report1.SetParameterValue("CodBatch", barcode) 'col4
+        Report1.SetParameterValue("descripcion", desc) 'col2
+        Report1.SetParameterValue("pesoreal", pes) 'col5
+        Report1.SetParameterValue("anchotira", anch) 'col6
+        Report1.SetParameterValue("bobina", itmcod) 'col1
         Report1.SetParameterValue("heat", het)
         Report1.SetParameterValue("coil", coi)
-        Report1.SetParameterValue("ordencorte", objectCode)
-        Report1.SetParameterValue("fechacorte", Now.ToShortDateString)
+        Report1.SetParameterValue("almacen", whs)
+        'Report1.SetParameterValue("ordencorte", objectCode)
+        'Report1.SetParameterValue("fechacorte", Now.ToShortDateString)
         'CrystalReportViewer1.ReportSource = Report1
         Report1.PrintToPrinter(1, False, 0, 0)
     End Sub
@@ -103,8 +111,8 @@ Public Class FrmP
                 For Each row As DataGridViewRow In DGV2.Rows
                     Dim chk As DataGridViewCheckBoxCell = row.Cells("CHK")
                     If chk.Value IsNot Nothing AndAlso chk.Value = True Then
-                        'barcode , desc , anch , pes , bob , het, coi
-                        imprime(DGV2.Rows(chk.RowIndex).Cells.Item(4).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(3).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(7).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(8).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(1).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(5).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(6).Value.ToString)
+                        'barcode 4 , desc 2 , anch 6, pes 5, itmcod 1, het 7, coi 8,whs 9
+                        imprime(DGV2.Rows(chk.RowIndex).Cells.Item(4).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(2).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(6).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(5).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(1).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(7).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(8).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(9).Value.ToString)
                     End If
                 Next
 
@@ -113,6 +121,7 @@ Public Class FrmP
             '-----------------------------------------------------------------------------------
             MessageBox.Show("Operacion Realizada Exitosamente!")
             DGV2.Visible = False
+            Panel1.Visible = False
         Catch ex As Exception
             MsgBox("Error: " + ex.Message.ToString)
         End Try
@@ -130,26 +139,27 @@ Public Class FrmP
         objectCode = DGV(0, DGV.CurrentCell.RowIndex).Value.ToString()
 
         Dim SQL_da2 As SqlDataAdapter = New SqlDataAdapter("
-        select T1.CardCode,T1.CardName,t1.NumAtCard,T1.DocDate
+        select T1.CardCode,T1.CardName,T1.DocNum,t1.NumAtCard,T1.TaxDate,T1.DocDate
         from OPDN T1", con.ObtenerConexion())
         Dim DT_dat2 As System.Data.DataTable = New System.Data.DataTable()
         SQL_da2.Fill(DT_dat2)
         Label3.Text = DT_dat2.Rows(0).Item("CardCode").ToString
         Label5.Text = DT_dat2.Rows(0).Item("CardName").ToString
         Label7.Text = DT_dat2.Rows(0).Item("NumAtCard").ToString
-        Label9.Text = DT_dat2.Rows(0).Item("DocDate").ToString
+        Label9.Text = DT_dat2.Rows(0).Item("TaxDate").ToString
+        Label11.Text = DT_dat2.Rows(0).Item("DocDate").ToString
         con.ObtenerConexion.Close()
 
         Panel1.Visible = True
 
-        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode,t4.ItemName,SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as Quantitys, T4.BatchNum, T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo
+        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode,t4.ItemName,SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as Quantitys, T4.BatchNum,'peso' as Peso,t3.U_Ancho,T3.U_Heat,t3.U_Coi,t4.whscode
 FROM OITL T0
 INNER JOIN OPDN T2 on t2.DocEntry = t0.DocEntry		
 INNER JOIN ITL1 T1 ON T0.LogEntry = T1.LogEntry
 INNER JOIN OBTN T3 ON T1.MdAbsEntry = T3.AbsEntry
 inner join IBT1 T4 on T4.BatchNum = T3.DistNumber
 WHERE T0.DocEntry =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' AND T0.DocNum =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' and T0.BaseEntry = 0
-GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo", con.ObtenerConexion())
+GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo,T4.whscode", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
         DGV2.DataSource = DT_dat
@@ -220,11 +230,18 @@ GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.
     'End Sub
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("select DocNum from opdn where CANCELED = 'N' and docdate ='" + DateTimePicker1.Value.ToString("yyyy/MM/dd") + "' ORDER BY DocNum", con.ObtenerConexion())
+        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("select isnull(DocNum,'0') as DocNum from opdn where CANCELED = 'N' and docdate ='" + DateTimePicker1.Value.ToString("yyyy/MM/dd") + "' ORDER BY DocNum", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
         DGV.DataSource = DT_dat
-        txtOrder.Text = DT_dat.Rows(0).Item("DocNum").ToString
+        If DT_dat.Rows.Count = 0 Then
+            MessageBox.Show("No Hay Documentos en esta Fecha")
+        Else
+            txtOrder.Text = DT_dat.Rows(0).Item("DocNum").ToString
+        End If
+
         con.ObtenerConexion.Close()
     End Sub
+
+
 End Class

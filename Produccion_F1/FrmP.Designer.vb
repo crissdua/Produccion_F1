@@ -33,6 +33,10 @@ Partial Class FrmP
         Me.DGV = New System.Windows.Forms.DataGridView()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -41,8 +45,6 @@ Partial Class FrmP
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtOrder = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DGV2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,7 +54,7 @@ Partial Class FrmP
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 288)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 316)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(537, 22)
         Me.StatusStrip1.TabIndex = 4
@@ -66,7 +68,7 @@ Partial Class FrmP
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(326, 260)
+        Me.Button3.Location = New System.Drawing.Point(326, 283)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(89, 23)
         Me.Button3.TabIndex = 62
@@ -75,7 +77,7 @@ Partial Class FrmP
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(231, 260)
+        Me.Button2.Location = New System.Drawing.Point(231, 283)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(89, 23)
         Me.Button2.TabIndex = 61
@@ -84,7 +86,7 @@ Partial Class FrmP
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(136, 260)
+        Me.Button1.Location = New System.Drawing.Point(136, 283)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(89, 23)
         Me.Button1.TabIndex = 60
@@ -97,7 +99,7 @@ Partial Class FrmP
         Me.DGV2.AllowUserToDeleteRows = False
         Me.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CHK})
-        Me.DGV2.Location = New System.Drawing.Point(136, 135)
+        Me.DGV2.Location = New System.Drawing.Point(136, 158)
         Me.DGV2.Name = "DGV2"
         Me.DGV2.Size = New System.Drawing.Size(387, 108)
         Me.DGV2.TabIndex = 59
@@ -125,7 +127,7 @@ Partial Class FrmP
         Me.DGV.Location = New System.Drawing.Point(12, 47)
         Me.DGV.Name = "DGV"
         Me.DGV.ReadOnly = True
-        Me.DGV.Size = New System.Drawing.Size(118, 196)
+        Me.DGV.Size = New System.Drawing.Size(118, 219)
         Me.DGV.TabIndex = 56
         '
         'DateTimePicker1
@@ -140,6 +142,8 @@ Partial Class FrmP
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.Label6)
@@ -152,14 +156,50 @@ Partial Class FrmP
         Me.Panel1.Controls.Add(Me.txtOrder)
         Me.Panel1.Location = New System.Drawing.Point(136, 21)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(387, 108)
+        Me.Panel1.Size = New System.Drawing.Size(387, 131)
         Me.Panel1.TabIndex = 85
         Me.Panel1.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(3, 102)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(78, 13)
+        Me.Label10.TabIndex = 11
+        Me.Label10.Text = "Fecha Ingreso:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(122, 102)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(45, 13)
+        Me.Label11.TabIndex = 10
+        Me.Label11.Text = "Label11"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 82)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(98, 13)
+        Me.Label8.TabIndex = 9
+        Me.Label8.Text = "Fecha Documento:"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(122, 82)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(39, 13)
+        Me.Label9.TabIndex = 8
+        Me.Label9.Text = "Label9"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(3, 65)
+        Me.Label6.Location = New System.Drawing.Point(3, 62)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(46, 13)
         Me.Label6.TabIndex = 7
@@ -168,7 +208,7 @@ Partial Class FrmP
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(122, 65)
+        Me.Label7.Location = New System.Drawing.Point(122, 63)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(39, 13)
         Me.Label7.TabIndex = 6
@@ -228,29 +268,11 @@ Partial Class FrmP
         Me.txtOrder.TabIndex = 0
         Me.txtOrder.Text = "Label1"
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 84)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(98, 13)
-        Me.Label8.TabIndex = 9
-        Me.Label8.Text = "Fecha Documento:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(122, 84)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(39, 13)
-        Me.Label9.TabIndex = 8
-        Me.Label9.Text = "Label9"
-        '
         'FrmP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 310)
+        Me.ClientSize = New System.Drawing.Size(537, 338)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.Button3)
@@ -295,4 +317,6 @@ Partial Class FrmP
     Friend WithEvents txtOrder As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
 End Class
