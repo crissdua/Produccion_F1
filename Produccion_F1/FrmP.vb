@@ -42,11 +42,10 @@ Public Class FrmP
             Return myCp
         End Get
     End Property
-    Public Sub New(ByVal user As String)
+    Public Sub New()
         MyBase.New()
         InitializeComponent()
         '  Note which form has called this one
-        ToolStripStatusLabel1.Text = user
     End Sub
     Private Function FormatBarCode(code As String)
         Dim barcode As String = String.Empty
@@ -70,11 +69,11 @@ Public Class FrmP
     Private Sub imprime(barcode As String, desc As String, anch As String, pes As String, itmcod As String, het As String, coi As String, whs As String)
         Dim Report1 As New CrystalDecisions.CrystalReports.Engine.ReportDocument()
         Report1.PrintOptions.PaperOrientation = PaperOrientation.Portrait
-        Report1.Load(Application.StartupPath + "\Report\Informe.rpt", CrystalDecisions.Shared.OpenReportMethod.OpenReportByDefault.OpenReportByDefault)
+        Report1.Load(Application.StartupPath + "\Report\InformeF1.rpt", CrystalDecisions.Shared.OpenReportMethod.OpenReportByDefault.OpenReportByDefault)
         ''-----------------------------------------ENCABEZADO NO CAMBIA POR IMPRESION------------------------------------------
         Report1.SetParameterValue("cardcode", Label3.Text)
         Report1.SetParameterValue("cardname", Label5.Text)
-        Report1.SetParameterValue("docnum", Label1.Text)
+        Report1.SetParameterValue("docnum", txtOrder.Text)
         Report1.SetParameterValue("docdate", Label9.Text)
         Report1.SetParameterValue("numatcard", Label7.Text)
         Report1.SetParameterValue("ingresodate", Label11.Text)
@@ -102,7 +101,7 @@ Public Class FrmP
         Dim docentry As String
 
         Try
-            Dim result As Integer = MessageBox.Show("Desea Imprimir los Lotes?", "Atencion", MessageBoxButtons.YesNoCancel)
+            Dim result As Integer = MessageBox.Show("Desea Imprimir Ingreso MP?", "Atencion", MessageBoxButtons.YesNoCancel)
             If result = DialogResult.Cancel Then
                 MessageBox.Show("Cancelado")
             ElseIf result = DialogResult.No Then
@@ -112,7 +111,7 @@ Public Class FrmP
                     Dim chk As DataGridViewCheckBoxCell = row.Cells("CHK")
                     If chk.Value IsNot Nothing AndAlso chk.Value = True Then
                         'barcode 4 , desc 2 , anch 6, pes 5, itmcod 1, het 7, coi 8,whs 9
-                        imprime(DGV2.Rows(chk.RowIndex).Cells.Item(4).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(2).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(6).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(5).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(1).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(7).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(8).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(9).Value.ToString)
+                        imprime(DGV2.Rows(chk.RowIndex).Cells.Item(4).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(2).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(6).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(3).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(1).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(7).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(8).Value.ToString, DGV2.Rows(chk.RowIndex).Cells.Item(9).Value.ToString)
                     End If
                 Next
 
@@ -139,26 +138,27 @@ Public Class FrmP
         objectCode = DGV(0, DGV.CurrentCell.RowIndex).Value.ToString()
 
         Dim SQL_da2 As SqlDataAdapter = New SqlDataAdapter("
-        select T1.CardCode,T1.CardName,T1.DocNum,t1.NumAtCard,T1.TaxDate,T1.DocDate
-        from OPDN T1", con.ObtenerConexion())
+        select T1.CardCode,T1.CardName,T1.DocNum,t1.NumAtCard,convert(varchar(10),convert(date,T1.DocDate,106),103) as DocDate
+        from OPDN T1 where T1.DocEntry =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "'", con.ObtenerConexion())
         Dim DT_dat2 As System.Data.DataTable = New System.Data.DataTable()
         SQL_da2.Fill(DT_dat2)
+        txtOrder.Text = DGV(0, DGV.CurrentCell.RowIndex).Value.ToString()
         Label3.Text = DT_dat2.Rows(0).Item("CardCode").ToString
         Label5.Text = DT_dat2.Rows(0).Item("CardName").ToString
         Label7.Text = DT_dat2.Rows(0).Item("NumAtCard").ToString
-        Label9.Text = DT_dat2.Rows(0).Item("TaxDate").ToString
-        Label11.Text = DT_dat2.Rows(0).Item("DocDate").ToString
+        Label9.Text = DT_dat2.Rows(0).Item("DocDate").ToString
+        Label11.Text = DateTime.Now.ToShortDateString
         con.ObtenerConexion.Close()
 
         Panel1.Visible = True
 
-        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode,t4.ItemName,SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as Quantitys, T4.BatchNum,'peso' as Peso,t3.U_Ancho,T3.U_Heat,t3.U_Coi,t4.whscode
+        Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode as 'Codigo de Articulo',t4.ItemName as 'Descripcion del Articulo',SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as TM, T4.BatchNum as Lote,'peso' as Peso,CONVERT(int,t3.U_Ancho) as Ancho,T3.U_Heat as Heat,t3.U_Coi as Coil,t4.whscode as Almacen
 FROM OITL T0
 INNER JOIN OPDN T2 on t2.DocEntry = t0.DocEntry		
 INNER JOIN ITL1 T1 ON T0.LogEntry = T1.LogEntry
 INNER JOIN OBTN T3 ON T1.MdAbsEntry = T3.AbsEntry
 inner join IBT1 T4 on T4.BatchNum = T3.DistNumber
-WHERE T0.DocEntry =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' AND T0.DocNum =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' and T0.BaseEntry = 0
+WHERE T0.DocEntry =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' AND T0.DocNum =  '" + DGV(0, DGV.CurrentCell.RowIndex).Value.ToString() + "' and T0.BaseEntry = 0 and t4.WhsCode = 'BMP2'
 GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo,T4.whscode", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
@@ -191,9 +191,9 @@ GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.
             GoodsReceiptPO = Nothing
             DGV.DataSource = Nothing
             DGV2.DataSource = Nothing
-            MessageBox.Show("Inicie un objeto nuevo")
         End If
         DGV2.Visible = False
+        Panel1.Visible = False
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -201,13 +201,11 @@ GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.
         If result = DialogResult.No Then
             MessageBox.Show("Puede continuar")
         ElseIf result = DialogResult.Yes Then
-            MessageBox.Show("Finalizando modulo")
             Try
                 con.oCompany.Disconnect()
             Catch
             End Try
-            Application.Exit()
-            Me.Close()
+            Me.Hide()
         End If
     End Sub
 
@@ -230,6 +228,10 @@ GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.
     'End Sub
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("select isnull(DocNum,'0') as DocNum from opdn where CANCELED = 'N' and docdate ='" + DateTimePicker1.Value.ToString("yyyy/MM/dd") + "' ORDER BY DocNum", con.ObtenerConexion())
         Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
         SQL_da.Fill(DT_dat)
@@ -243,5 +245,44 @@ GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.
         con.ObtenerConexion.Close()
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
+        Try
+            DGV2.Visible = Enabled
+
+            Dim SQL_da2 As SqlDataAdapter = New SqlDataAdapter("
+            select T1.CardCode,T1.CardName,T1.DocNum,t1.NumAtCard,convert(varchar(10),convert(date,T1.DocDate,106),103) as DocDate
+            from OPDN T1 where T1.DocEntry =  '" + TextBox1.Text + "'", con.ObtenerConexion())
+            Dim DT_dat2 As System.Data.DataTable = New System.Data.DataTable()
+            SQL_da2.Fill(DT_dat2)
+            txtOrder.Text = TextBox1.Text
+            Label3.Text = DT_dat2.Rows(0).Item("CardCode").ToString
+            Label5.Text = DT_dat2.Rows(0).Item("CardName").ToString
+            Label7.Text = DT_dat2.Rows(0).Item("NumAtCard").ToString
+            Label9.Text = DT_dat2.Rows(0).Item("DocDate").ToString
+            Label11.Text = DateTime.Now.ToShortDateString
+            con.ObtenerConexion.Close()
+
+            Panel1.Visible = True
+
+            Dim SQL_da As SqlDataAdapter = New SqlDataAdapter("SELECT t4.ItemCode as 'Codigo de Articulo',t4.ItemName as 'Descripcion del Articulo',SUM(CASE T4.Direction when 0 then 1 else -1 end * T4.Quantity) as TM, T4.BatchNum as Lote,'peso' as Peso,CONVERT(int,t3.U_Ancho) as Ancho,T3.U_Heat as Heat,t3.U_Coi as Coil,t4.whscode as Almacen
+    FROM OITL T0
+    INNER JOIN OPDN T2 on t2.DocEntry = t0.DocEntry		
+    INNER JOIN ITL1 T1 ON T0.LogEntry = T1.LogEntry
+    INNER JOIN OBTN T3 ON T1.MdAbsEntry = T3.AbsEntry
+    inner join IBT1 T4 on T4.BatchNum = T3.DistNumber
+    WHERE T0.DocEntry =  '" + TextBox1.Text + "' AND T0.DocNum =  '" + TextBox1.Text + "' and T0.BaseEntry = 0 and t4.WhsCode = 'BMP2'
+    GROUP BY t4.ItemCode,t4.itemname,T4.BatchNum , T3.U_Heat,t3.U_Coi,t3.U_Ancho,t3.U_Correlativo,T4.whscode", con.ObtenerConexion())
+            Dim DT_dat As System.Data.DataTable = New System.Data.DataTable()
+            SQL_da.Fill(DT_dat)
+            DGV2.DataSource = DT_dat
+            For Each row As DataGridViewRow In DGV2.Rows
+                row.Cells("CHK").Value = True
+            Next
+            con.ObtenerConexion.Close()
+        Catch ex As Exception
+            MessageBox.Show("La Entrada no Existe")
+        End Try
+
+    End Sub
 End Class
