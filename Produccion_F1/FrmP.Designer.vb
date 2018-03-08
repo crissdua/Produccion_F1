@@ -22,7 +22,7 @@ Partial Class FrmP
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -47,6 +47,7 @@ Partial Class FrmP
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         CType(Me.DGV2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -87,13 +88,13 @@ Partial Class FrmP
         '
         Me.DGV2.AllowUserToAddRows = False
         Me.DGV2.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.DGV2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        Me.DGV2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CHK})
-        Me.DGV2.Location = New System.Drawing.Point(136, 163)
+        Me.DGV2.Location = New System.Drawing.Point(136, 180)
         Me.DGV2.Name = "DGV2"
-        Me.DGV2.Size = New System.Drawing.Size(620, 248)
+        Me.DGV2.Size = New System.Drawing.Size(620, 231)
         Me.DGV2.TabIndex = 59
         '
         'CHK
@@ -292,6 +293,17 @@ Partial Class FrmP
         Me.Button4.TabIndex = 87
         Me.Button4.UseVisualStyleBackColor = False
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(179, 159)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(41, 17)
+        Me.CheckBox1.TabIndex = 89
+        Me.CheckBox1.Text = "OK"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox1.Visible = False
+        '
         'FrmP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,6 +312,7 @@ Partial Class FrmP
         Me.BackgroundImage = Global.Produccion_F1.My.Resources.Resources.fondoGrande
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(768, 464)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
@@ -349,4 +362,5 @@ Partial Class FrmP
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
