@@ -55,8 +55,9 @@ Partial Class FrmP
         '
         'Button3
         '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.Location = New System.Drawing.Point(725, 5)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(31, 15)
@@ -66,6 +67,7 @@ Partial Class FrmP
         '
         'Button2
         '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Button2.BackgroundImage = Global.Produccion_F1.My.Resources.Resources.cancelar
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button2.Location = New System.Drawing.Point(85, 417)
@@ -76,6 +78,7 @@ Partial Class FrmP
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackgroundImage = Global.Produccion_F1.My.Resources.Resources.crear
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button1.Location = New System.Drawing.Point(12, 417)
@@ -90,11 +93,14 @@ Partial Class FrmP
         Me.DGV2.AllowUserToDeleteRows = False
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         Me.DGV2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CHK})
-        Me.DGV2.Location = New System.Drawing.Point(136, 180)
+        Me.DGV2.Location = New System.Drawing.Point(136, 187)
         Me.DGV2.Name = "DGV2"
-        Me.DGV2.Size = New System.Drawing.Size(620, 231)
+        Me.DGV2.Size = New System.Drawing.Size(620, 227)
         Me.DGV2.TabIndex = 59
         '
         'CHK
@@ -117,8 +123,10 @@ Partial Class FrmP
         '
         Me.DGV.AllowUserToAddRows = False
         Me.DGV.AllowUserToDeleteRows = False
+        Me.DGV.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV.Location = New System.Drawing.Point(12, 91)
+        Me.DGV.Location = New System.Drawing.Point(12, 95)
         Me.DGV.Name = "DGV"
         Me.DGV.ReadOnly = True
         Me.DGV.Size = New System.Drawing.Size(123, 320)
@@ -128,13 +136,15 @@ Partial Class FrmP
         '
         Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(12, 60)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(12, 64)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(100, 20)
         Me.DateTimePicker1.TabIndex = 64
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.Label10)
@@ -149,7 +159,7 @@ Partial Class FrmP
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.txtOrder)
-        Me.Panel1.Location = New System.Drawing.Point(136, 26)
+        Me.Panel1.Location = New System.Drawing.Point(136, 33)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(620, 131)
         Me.Panel1.TabIndex = 85
@@ -265,7 +275,7 @@ Partial Class FrmP
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 32)
+        Me.TextBox1.Location = New System.Drawing.Point(12, 36)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
         Me.TextBox1.TabIndex = 86
@@ -275,7 +285,7 @@ Partial Class FrmP
         Me.Button5.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button5.BackgroundImage = Global.Produccion_F1.My.Resources.Resources.link
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Location = New System.Drawing.Point(113, 57)
+        Me.Button5.Location = New System.Drawing.Point(113, 61)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(22, 23)
         Me.Button5.TabIndex = 88
@@ -287,7 +297,7 @@ Partial Class FrmP
         Me.Button4.BackgroundImage = Global.Produccion_F1.My.Resources.Resources.link
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(113, 30)
+        Me.Button4.Location = New System.Drawing.Point(113, 34)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(22, 23)
         Me.Button4.TabIndex = 87
@@ -295,8 +305,11 @@ Partial Class FrmP
         '
         'CheckBox1
         '
+        Me.CheckBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(179, 159)
+        Me.CheckBox1.Location = New System.Drawing.Point(179, 166)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(41, 17)
         Me.CheckBox1.TabIndex = 89
@@ -325,7 +338,6 @@ Partial Class FrmP
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.DGV)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.HelpButton = True
         Me.Name = "FrmP"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
