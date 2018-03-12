@@ -101,16 +101,4 @@ C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\Crysta
 C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.Windows.Forms.dll
 C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\log4net.dll
 C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.CrystalReports.Design.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.VSDesigner.dll
 C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.Web.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.Enterprise.Viewing.ReportSource.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CRVsPackageLib.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\Microsoft.VisualStudio.TemplateWizardInterface.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\EnvDTE.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\BusinessObjects.Foundation.Logging.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\VSLangProj.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\VsWebSite.Interop.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\EnvDTE80.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.PromptingClientSDK.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\bin\Debug\CrystalDecisions.Enterprise.PluginManager.dll
-C:\Users\Developer\Documents\GitHub\Produccion_F1\Produccion_F1\obj\Debug\Produccion_F1.vbproj.Produccion_F1.exe.config
